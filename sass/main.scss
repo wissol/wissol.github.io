@@ -1,27 +1,6 @@
 // Variables
 
-$default-font-size: 1.3rem;
-$h1-font-size: 2.6rem;
-$h2-font-size: 2.0rem;
-$small-font-size: 1rem;
-$nav-font-size: $small-font-size;
-$default-line-height: 1.4;
-$default-font-family: 'Hind Siliguri', serif;
-$monospace-font-family: 'Cutive Mono', monospace;
-$text-max-width: 800px;
-$p-text-indent: 3rem;
-$container-padding: 1vh;
-
-$color1: #967d69; //rgba(150, 125, 105, 100)
-$color2: #92b9bd; //rgba(146, 185, 189, 100)
-$color3: white; 
-$color4: black; 
-
-$main-font-color: $color4;
-$secondary-font-color: $color3;
-$link-font-color: $color3;
-$header-background: $color1;
-$main-background: $color2;
+@import 'variables';
 
 // Reset
 
@@ -39,6 +18,7 @@ html {
 }
 
 body {
+	font-family: $default-font-family;
 	display: flex;
 	justify-content: space-around;
 	flex-direction: column;
@@ -54,7 +34,7 @@ header {
 	display: flex;
 	flex-grow: 1;
 	flex-direction: column;
-	justify-content: space-around;
+	//justify-content: space-around;
 	background-color: $header-background;
 	color: $secondary-font-color;
 }
@@ -75,7 +55,7 @@ main {
 article {
 	max-width: $text-max-width;
 	margin: auto;
-	padding: 2em;
+	padding: 0 2em;
 }
 
 // navigation
@@ -102,15 +82,16 @@ a {
 // headers
 
 h1 {
+	font-family: $default-font-family;
 	font-size: $h1-font-size;
 }
 
 h2 {
-	
+	font-family: $default-font-family;
 	margin-bottom: 5vh;
 	display: inline-block;
 	padding: 1em;
-	background-color: $color1;
+	background-color: $color-cement;
 	color: white;
 	border-radius: 5em;
 
@@ -135,7 +116,7 @@ p + p {
 
 	figure {
 		width: 100%;
-		margin: 2em auto;
+		margin: 0 auto 2em auto;
 	}
 
 	img {
@@ -144,7 +125,7 @@ p + p {
 		-moz-box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.1);
 		box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.1);
 		padding: 0.5em;
-		background-color: $color1;	
+		background-color: $color-cement;	
 		margin: auto;
 	}
 
@@ -153,9 +134,15 @@ p + p {
 		font-size: $small-font-size;
 	}
 
+	p + figure {
+		margin-top: 2em;
+	}
+
 // media queries
 
 @media (min-width: 900px) {
+
+	
 
 	nav ul {
 		flex-direction: column;
@@ -173,19 +160,25 @@ p + p {
 		flex-direction:row;
 		overflow-x: hidden;
 	}
-	main {
-		width: 75vw;
-		border-left: solid thick black;
-		overflow: hidden;
-		border-top: none;
-	}
 
 	header {
 		width: 25vw;
 	}
 
+	main {
+		width: 75vw;
+		border-left: solid thick black;
+		overflow: hidden;
+		border-top: none;
+	}	
+
+	header,
+	main {
+		padding: 5vh 0;
+	}
+
 	article {
-		padding: 15vh 0  1vh 5vw
+		padding: 0 0 1vh 5vw;
 	}
 
 	article p {
@@ -201,11 +194,11 @@ p + p {
 
 @media (min-width: 1300px){
 	main {
-		width: 80vw;
+		width: 70vw;
 	}
 
 	header {
-		width: 19vw;
+		width: 29vw;
 		padding-right: 0;
 		padding-left: 0;
 	}
