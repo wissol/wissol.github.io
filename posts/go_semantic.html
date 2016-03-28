@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lan="EN">
+
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<meta charset="utf-8" /> 
+		
+		<meta name="description" content="Serenicode, the blog of Miguel de Luis, about Code, Fun and the occasional bit of wisdom">
+		<meta name="author" content="Miguel de Luis"> 
+		
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> 
+		<link href='https://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+		<!-- fonts -->
+
+		<link rel="stylesheet" type="text/css" href="../css/main.css" media="screen" /> 
+		<!-- CSS, compressed -->
+
+		<title>Serenicode, code, fun and the occasional bit of wisdom | Going semantic</title>
+		
+	</head>
+
+	<body>
+		<header>			
+			<div class="wrapper">
+			<div id="blog-header">
+				<h1><a href="../">Serenicode</a></h1>
+				<address>By <a href="mailto:miguel@sabiavida.com" rel="author">Miguel de Luis</a></address>
+			</div>
+
+			<nav>
+				<ul>
+					<li><a href="../posts.html">posts</a></li>
+					<li><a href="../mail.html">mail list</a></li>
+					<li><a href="mailto:miguel@sabiavida.com">contact</a></li>
+					<li><a href="https://github.com/wissol">github profile</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		</header>
+
+		<main>
+
+			<article>
+
+				<h2>Going semantic</h2>
+
+				<p>
+				The <code>&lt;main&gt;</code> HTML tag is paradoxically absent from most of the web. I
+				haven't done a research, but what I usually find, in the place of <i>main</i>,
+				it's just a wrapper div, sometimes even curiously framed as 
+				<code>&lt;div class="main"&gt;</code>. It could hardly be more ironic. Tags such as
+				<code>&lt;article&gt;</code> or <code>&lt;section&gt;</code> are also hard to find, even
+				though when they make perfect, obvious sense, much more preferable to the generic 
+				<i>div</i>. I suppose there must be some reason behind it, perhaps just habit, or
+				not being able or allowed to touch a website generator; but I will stop my guessing 
+				right now. Let me, instead, focus on why we should use them.
+				</p>
+
+				<ol>
+					<li>It's generally good practice</li>
+					<li>It makes life easier for applications and its users: think on screen readers, or web crawlers</li>
+					<li>It makes your code easier to mantain</li>
+				</ol>
+
+				<p>
+					Let me dwell in the later point, even if you are working on your one, on your pet project,
+					one that you revise almost every day so you know it to the last comma, do you really need a
+					mesh of nested divs on divs, all injected with classes? You know what? <code>&lt;main&gt;</code>
+					can have <i>id</i> and <i>class</i> too, so you can make that <i>framework</i>, 
+					or any other piece of code happy, with the added benefit of saying what you mean. That is
+					what I love about Python, that its structure is, almost without exception, clear and to the point.
+					And that is something I always want in my code.
+				</p>
+
+			</article>
+
+		</main>
+
+
+	</body>
+</html>

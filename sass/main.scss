@@ -65,10 +65,16 @@ section {
 
 ul {
 	list-style: disc;
+	
 }
 
 ol {
-	list-style: decimal inside;
+	list-style: decimal;
+}
+
+ul, ol {
+	margin: 3vh 5vw;
+	line-height: 1.3;
 }
 
 li {
@@ -90,6 +96,8 @@ nav ul {
 	justify-content: space-around;
 	list-style: none;
 	align-items: center;
+	margin: 0;
+	line-height: 1;
 	}
 
 nav ul li {
@@ -148,6 +156,12 @@ p + p {
 	text-indent: $p-text-indent;
 }
 
+code {
+	font-family: $monospace-font-family;
+	display: inline-block;
+	padding: 0 0.5em;
+}
+
 // images
 
 	figure {
@@ -174,9 +188,27 @@ p + p {
 		margin-top: 2em;
 	}
 
+// emphasis and that bunch
+
+em:before {
+	content: '\201C';
+}
+
+em:after {
+	content: '\201D';
+}
+
+i {
+	font-style: italic;
+}
+
+cite {
+	font-variant: small-caps;
+}
+
 // media queries
 
-@media (min-width: 900px) {	
+@media (min-width: 1200px) {	
 
 	nav ul {
 		flex-direction: column;
