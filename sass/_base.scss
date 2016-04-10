@@ -1,0 +1,94 @@
+// headers
+
+h1 {
+	font-family: $default-font-family;
+	font-size: $h1-font-size;
+}
+
+h2 {
+	font-family: $default-font-family;
+	font-size: $default-font-size;
+	margin-bottom: 5vh;
+	display: inline-block;
+	padding: 1em;
+	background-color: $color-cement;
+	color: white;
+	border-radius: 5em;
+
+	-webkit-box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.1);
+	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.1);
+}
+
+h3 {
+	display: inline-block;
+	font-family: $default-font-family;
+	font-size: $default-font-size;
+	margin: 2vh auto;
+}
+
+p + h3 {
+	margin-top: 4.5vh;
+}
+
+
+// Paragraphs and the like
+
+p {
+	margin: auto;
+	line-height: $default-line-height;	
+}
+
+p + p { 
+	text-indent: $p-text-indent;
+}
+
+code {
+	font-family: $monospace-font-family;
+	display: inline-block;
+	padding: 0 0.5em;
+}
+
+// images
+
+	figure {
+		width: 100%;
+		margin: 0 auto 2em auto;
+	}
+
+	img {
+		width: 100%;
+		-webkit-box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.1);
+		-moz-box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.1);
+		box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.1);
+		padding: 0.5em;
+		background-color: $color-cement;	
+		margin: auto;
+	}
+
+	figcaption {
+		margin: 1em auto;
+		font-size: $small-font-size;
+	}
+
+	p + figure {
+		margin-top: 2em;
+	}
+
+// emphasis and that bunch
+
+em:before {
+	content: '\201C';
+}
+
+em:after {
+	content: '\201D';
+}
+
+i {
+	font-style: italic;
+}
+
+cite {
+	font-variant: small-caps;
+}

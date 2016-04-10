@@ -1,0 +1,52 @@
+html {
+	font-family: $default-font-family;
+	font-size: $default-font-size;	
+	color: $main-font-color;	
+	min-height: 100vh;
+}
+
+body {
+	font-family: $default-font-family;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	align-items: stretch;
+	min-height: 100vh;
+}
+
+header,
+main {
+	padding: 5vh 0;
+	}
+
+header {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	//justify-content: space-around;
+	background-color: $header-background;
+	color: $secondary-font-color;
+}
+
+main {
+	flex-grow: 2;
+	background: $main-background;
+	border-top: solid thick black;
+	}
+
+#blog-header {
+	padding-bottom: 5vh;
+	margin:auto;
+	text-align: center;
+}
+
+
+article {
+	max-width: $text-max-width;
+	margin: auto;
+	padding: 0 2em;
+}
+
+section {
+	margin: 5em 0;
+}
