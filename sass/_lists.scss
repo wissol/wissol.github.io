@@ -15,8 +15,13 @@ ul, ol {
 li {
 	font-size: $default-font-size;
 	padding-top: 0.5rem;
+
+	p {
+		text-indent: 0.5em;
+	}
 }
 
 .toc li {
 	margin-bottom: 0.5rem;
+	list-style: none;
 }

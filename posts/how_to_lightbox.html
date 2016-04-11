@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lan="EN">
+
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<meta charset="utf-8" /> 
+		
+		<meta name="description" content="How I coded my simple jQuery lightbox">
+		<meta name="author" content="Miguel de Luis"> 
+		
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> 
+		<link href='https://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+		<!-- fonts -->
+
+		<link rel="stylesheet" type="text/css" href="../css/main.css" media="screen" /> 
+		<!-- CSS, compressed -->
+
+		<title>How I coded my simple lightbox | Serenicode, code, fun and the occasional bit of wisdom</title>
+		
+	</head>
+
+	<body>
+		<header>			
+			<div class="wrapper">
+			<div id="blog-header">
+				<h1><a href="../">Serenicode</a></h1>
+				<address>By <a href="mailto:miguel@sabiavida.com" rel="author">Miguel de Luis</a></address>
+			</div>
+
+			<nav>
+				<ul>
+					<li><a href="../posts.html">content</a></li>
+					<li><a href="../mail.html">mail list</a></li>
+					<li><a href="mailto:miguel@sabiavida.com">contact</a></li>
+					<li><a href="https://github.com/wissol">github profile</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		</header>
+
+		<main>
+
+			<article>
+
+				<h2>How I coded my lightbox</h2>
+
+				<p>
+					The short version is that I used jQuery and CSS. It is all good and dandy
+					to separate interactivity from presentation but then you must make them
+					work together. 
+				</p>
+								
+				<p>
+					The long version of this story is stored on its 
+					<a href="https://github.com/wissol/ipgallery/tree/gh-pages">github</a>
+					repository, and its <a href="http://www.serenicode.com/ipgallery/">demo</a>.
+					Just allow me to add a few comments along the way.
+				</p>
+
+				<h3>The HTML</h3>
+
+				<p>
+					For the HTML I made a decision for HTML5, using <code>&lt;figure&gt;</code>
+					and <code>&lt;figcaption&gt;</code> for the dinamic content. That left me with
+					a simple framework to display and present on the page. The js generates or
+					updates this basic structure:
+					
+
+				</p>
+
+<figure>
+<pre>
+<code>
+&lt;figure class="lightbox"&gt;
+
+&lt;iframe id="lbitem" class="video" width="X" height="Y" 
+src="https://www.youtube.com/embed/t31lVCPMEZc" frameborder="0"&gt;
+&lt;/iframe&gt;
+
+&lt;figcaption&gt;
+This is a caption
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+</code>
+</pre>
+</figure>
+
+				<p>
+					That is of course, in the case of a youtube video. An image is even simpler,
+					with an img tag and switching <code>class="video"</code> for <code>class=
+					"image"</code>. The .lighbox class identifies the figure as an lighbox
+					element so the CSS can tell it from other figures. Also the video dimensions
+					are generated through CSS, while there is no need for that in the images.
+				</p>
+
+				<h3>The Javascript</h3>
+
+				<p>
+					I will assume it is a safe bet that you are aware of JS and jQuery basics. If
+					not, please learn that first. That said, the complete implementation is
+					available on the repository, so let me focus on the main points.
+				</p>
+<figure>
+<pre>
+<code>
+
+$("img").click(function(event) {
+event.preventDefault();
+var is_video = $(this).hasClass('youtube');
+
+if(is_video){
+	display_figure_and_video(this);
+} else {
+	display_figure_and_image(this);
+}    
+
+	});
+
+</code>
+</pre>
+</figure>
+
+			<p>
+				I went for a functional approach, dividing my app into small, reusable functions.
+			</p>
+			<p>
+				The magic starts with this nameless function. It queries for an image element, checks
+				if it is a video and then calls either the display figure and video or display
+				figure and image functions accordingly. Both are very similar, yet the video
+				is slightly more complex so I will only comment on that one. 
+			</p>
+<figure>
+<pre>
+<code>
+function display_figure_and_video(thumbnail){
+var src = 
+	$(thumbnail).attr('src')
+	.replace('img/thumbs/',YOUTUBE_SOURCE_FIRST_PART)
+	.replace('.jpg','');
+var caption = 
+	$(thumbnail).attr('alt');
+var finished_iframe_element = 
+	IFRAME_ELEMENT;
+var fig_caption = 
+	'$lt;figcaption>xxx&lt;/figcaption>';
+var dimensions = 
+	get_video_dimensions();  /* width, height */
+
+finished_iframe_element = 
+	finished_iframe_element.replace('xxx', dimensions[0])
+		.replace('yyy', dimensions[1])
+		.replace('zzz', src);
+fig_caption = 
+	fig_caption.replace('xxx',caption);
+
+$( $("body") )
+.append( FIG_BEGIN + 
+	finished_iframe_element + 
+	fig_caption + FIG_END)
+.append( RARROW )
+.append( LARROW )
+.prependTo( $("body") );
+
+$($("body")).addClass('no_scroll_bar');
+
+}
+</code>
+</pre>
+</figure>
+
+		<p>
+			So this function takes the source attribute of the thumbnail image and then replaces
+			its path with a string constant <code>'https://www.youtube.com/embed/'</code> and
+			deletes the <code>.jpg</code> tail. The figcaption is generated from the alt attribute
+			of its thumbnail.
+		</p>
+
+		<p>
+			The it calls the <code>get_video_dimensions()</code> which returns an array containing the
+			values for its width and height, based on the current width of the window while preserving
+			its aspect ratio. That function goes right below.
+		</p>
+<figure>
+<pre>
+<code>
+function get_video_dimensions(){
+var video_width = 1280;
+var video_height = 720;
+var aspect_ratio = video_height / video_width;
+var win_width = $(window).width();
+
+if (win_width < 800) {
+	video_width =  win_width;
+	video_height = video_width * aspect_ratio;
+} else {
+    if (win_width < 1680) {
+          video_width =  win_width * 0.8;
+          video_height = video_width * aspect_ratio;
+      } 
+}
+
+return [video_width, video_height];
+}
+</code>
+</pre>
+</figure>
+
+				<p>
+					Once <code>get_video_dimensions()</code> gets its work done, all that remains is to 
+					append the generated html to the body. CSS does the rest, adding an almost opaque
+					background.
+				</p>
+
+				<p>
+					To be continued <date>2016/04/11</date>
+				</p>
+
+			</article>
+
+		</main>
+
+
+	</body>
+</html>
