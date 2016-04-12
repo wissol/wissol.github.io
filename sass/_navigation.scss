@@ -19,6 +19,11 @@ nav {
 		li 
 		{
 		font-size: $nav-font-size;
+
+			@media #{$bk-narrow}
+				{
+				padding-bottom:1rem;
+				}
 		} //li
 
 	} //ul
