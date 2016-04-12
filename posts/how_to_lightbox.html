@@ -59,6 +59,8 @@
 					Just allow me to add a few comments along the way.
 				</p>
 
+				<h2>Enter the lighbox</h2>
+
 				<h3>The HTML</h3>
 
 				<p>
@@ -66,8 +68,6 @@
 					and <code>&lt;figcaption&gt;</code> for the dinamic content. That left me with
 					a simple framework to display and present on the page. The js generates or
 					updates this basic structure:
-					
-
 				</p>
 
 <figure>
@@ -213,11 +213,77 @@ return [video_width, video_height];
 				<p>
 					Once <code>get_video_dimensions()</code> gets its work done, all that remains is to 
 					append the generated html to the body. CSS does the rest, adding an almost opaque
-					background.
+					background. The right and left arrows are also prependend; finally the 
+					<code>no_scroll_bar</code> is prepended to the body elmenet to prevent, with CSS help,
+					the scroll bar from appearing, as it should be useless in a lightbox.
 				</p>
 
+<h2>Navigating the lightbox</h2>
+
+<figure>
+<code>
+<pre>
+function display_new_item(next){
+var src = $('#lbitem').attr('src');
+var is_video_displayed = $('#lbitem').hasClass('video');
+var query = '';
+var new_item = '';
+
+if (is_video_displayed) {
+src = src.replace(YOUTUBE_SOURCE_FIRST_PART,"img/thumbs/") + ".jpg";
+} else {
+src = src.slice(0, 3) + "/thumbs" + src.slice(3);
+
+}
+
+query = "img[src|='" + src + "']";
+console.log('query', query);
+
+if(next){
+new_item = $(query).next();
+} else {
+new_item = $(query).prev();
+}
+
+if (new_item.hasClass('youtube')){
+display_new_video(new_item);
+} else {		
+display_new_image(new_item);		
+}
+}
+
+function display_new_image(new_item){
+var is_video_displayed = $('#lbitem').hasClass('video');
+var new_caption = '';
+var new_src = '';
+var finished_image_element;
+
+
+if (is_video_displayed){
+/* replace iframe with image */
+
+new_src = new_item.attr('src').replace('thumbs/','');
+new_caption = new_item.attr('alt');
+
+$('figcaption').replaceWith("<figcaption>" + new_caption + "</figcaption>");
+finished_image_element = IMAGE_ELEMENT.replace('xxx',new_src);
+$('#lbitem').replaceWith(finished_image_element);
+
+} else {
+
+new_src = new_item.attr('src').replace('thumbs/','');
+new_caption = new_item.attr('alt');
+
+$('figcaption').replaceWith("<figcaption>" + new_caption + "</figcaption>");
+$('#lbitem').attr('src', new_src);
+}
+} 
+</code>
+</pre>
+</figure>
+
 				<p>
-					To be continued <date>2016/04/11</date>
+					To be continued <date>2016/04/12</date>
 				</p>
 
 			</article>
