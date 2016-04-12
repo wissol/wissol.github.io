@@ -5,37 +5,3 @@
 @import 'navigation';
 @import 'links';
 @import 'base';
-
-
-// media queries
-
-
-@media (min-width: 1300px){
-	main {
-		width: 70vw;
-	}
-
-	header {
-		width: 29vw;
-		padding-right: 0;
-		padding-left: 0;
-	}
-
-	article {
-		padding-right: 0;
-		padding-left: 0;
-	}
-}
-
-@media (min-width: 1600px){
-
-	article {
-		max-width: 990px;
-	}
-	article p {
-		font-size: 1.40rem;
-		max-width: 70vw;
-	}
-
-
-}

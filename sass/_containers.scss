@@ -37,7 +37,14 @@ header {
 		{
 		width: 25vw;
 		}
-}
+
+	@media #{$bk-medium}
+		{
+		width: 29vw;
+		padding-right: 0;
+		padding-left: 0;
+		}
+} //header
 
 main {
 	flex-grow: 2;
@@ -51,7 +58,13 @@ main {
 		overflow: hidden;
 		border-top: none;
 		}
-	}
+
+	@media #{$bk-medium}
+		{
+		width: 70vw;
+		}
+
+	} //main
 
 #blog-header {
 	padding-bottom: 5vh;
@@ -70,12 +83,29 @@ article {
 		padding: 0 0 1vh 5vw;
 		}
 
+	@media #{$bk-medium}
+		{
+		padding-right: 0;
+		padding-left: 0;
+		}
+
+	@media #{$bk-wide}
+		{
+		max-width: 990px;
+		}
+
 	p 
 		{
 		@media #{$bk-narrow}
 			{
 			font-size:1.35rem;
 			}
+		}
+
+		@media #{bk-wide}
+		{
+		font-size: 1.40rem;
+		max-width: 70vw;
 		}
 }
 
