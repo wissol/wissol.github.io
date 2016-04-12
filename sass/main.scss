@@ -11,42 +11,9 @@
 
 @media (min-width: 1200px) {	
 
-	h2 {
-		font-size: $h2-font-size;
-		padding: 0.5em;
-	}
-
-	h3 {
-		font-size: $h3-font-size;
-	}
-
-	body {
-		flex-direction:row;
-		overflow-x: hidden;
-	}
-
-	header {
-		width: 25vw;
-	}
-
-	main {
-		width: 75vw;
-		border-left: solid thick black;
-		overflow: hidden;
-		border-top: none;
-	}	
-
 	header,
 	main {
 		padding: 5vh 0;
-	}
-
-	article {
-		padding: 0 0 1vh 5vw;
-	}
-
-	article p {
-		font-size:1.35rem;
 	}
 
 	nav li {

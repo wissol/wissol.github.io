@@ -12,6 +12,12 @@ body {
 	flex-direction: column;
 	align-items: stretch;
 	min-height: 100vh;
+
+	@media #{$bk-narrow}
+		{
+		flex-direction:row;
+		overflow-x: hidden;
+		}
 }
 
 header,
@@ -26,12 +32,25 @@ header {
 	//justify-content: space-around;
 	background-color: $header-background;
 	color: $secondary-font-color;
+
+	@media #{$bk-narrow}
+		{
+		width: 25vw;
+		}
 }
 
 main {
 	flex-grow: 2;
 	background: $main-background;
 	border-top: solid thick black;
+
+	@media #{$bk-narrow}
+		{
+		width: 75vw;
+		border-left: solid thick black;
+		overflow: hidden;
+		border-top: none;
+		}
 	}
 
 #blog-header {
@@ -45,6 +64,19 @@ article {
 	max-width: $text-max-width;
 	margin: auto;
 	padding: 0 2em;
+
+	@media #{$bk-narrow}
+		{
+		padding: 0 0 1vh 5vw;
+		}
+
+	p 
+		{
+		@media #{$bk-narrow}
+			{
+			font-size:1.35rem;
+			}
+		}
 }
 
 section {
