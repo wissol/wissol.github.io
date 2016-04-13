@@ -1,0 +1,15 @@
+.footnote_content {
+	background:$header-background; 
+	display:block;
+	padding: .1em 1em;
+	color: white;
+}
+
+.bottom_border {
+	padding-bottom: .5em;
+	border-bottom: solid black thin;
+}
+
+aside.footnotes {
+	display:none;
+}
