@@ -11,7 +11,6 @@ $(document).ready(function() {
 			var final_footnote = FOOTNOTE_FRAME.replace("xxx", footnote_content);
 			final_footnote = final_footnote.replace('yyy', $(this).attr('href'));
 			$(this).parent().parent().after( final_footnote );
-			$(this).parent().parent().addClass('bottom_border');
 		}		
 	});
 

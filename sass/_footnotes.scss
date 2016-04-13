@@ -1,3 +1,8 @@
+p + .footnote_content {
+	border-top: solid black thick;
+	margin-top: 1em;
+}
+
 .footnote_content {
 	background:$header-background; 
 	display:block;
@@ -11,12 +16,8 @@
 
 .footnote_content + .footnote_content {
 	margin-top: 0;
-}
-
-.bottom_border {
-	padding-bottom: .5em;
-	border-bottom: solid black thin;
-}
+} 
+//These two add some top margin to anything adjacent but another footnote
 
 aside.footnotes {
 	display:none;

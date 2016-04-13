@@ -117,7 +117,10 @@ $(document).ready(function() {
 });
 
 /* This is the Sass code (almost straight CSS)
-
+p + .footnote_content {
+	border-top: solid black thick;
+	margin-top: 1em;
+}
 
 .footnote_content {
 	background:$header-background; 
@@ -135,11 +138,6 @@ $(document).ready(function() {
 	margin-top: 0;
 } 
 //These two add some top margin to anything adjacent but another footnote
-
-.bottom_border {
-	padding-bottom: .5em;
-	border-bottom: solid black thin;
-}
 
 aside.footnotes {
 	display:none;
