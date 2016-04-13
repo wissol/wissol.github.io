@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lan="EN">
+
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<meta charset="utf-8" /> 
+		
+		<meta name="description" content="How I coded my simple jQuery lightbox">
+		<meta name="author" content="Miguel de Luis"> 
+
+		<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script><!--jquery-->
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script><!--jquery-->
+		<script src="../js/footnote.js"></script><!-- footnote -->
+		<!-- scripts -->
+
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> 
+		<link href='https://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+		<!-- fonts -->
+
+		<link rel="stylesheet" type="text/css" href="../css/main.css" media="screen" /> 
+		<!-- CSS, compressed -->
+
+		<title>Footnotes.js demo | Serenicode, code, fun and the occasional bit of wisdom</title>
+		
+	</head>
+
+	<body>
+		<header>			
+			<div class="wrapper">
+			<div id="blog-header">
+				<h1><a href="../">Serenicode</a></h1>
+				<address>By <a href="mailto:miguel@sabiavida.com" rel="author">Miguel de Luis</a></address>
+			</div>
+
+			<nav>
+				<ul>
+					<li><a href="../posts.html">content</a></li>
+					<li><a href="../mail.html">mail list</a></li>
+					<li><a href="mailto:miguel@sabiavida.com">contact</a></li>
+					<li><a href="https://github.com/wissol">github profile</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		</header>
+
+		<main>
+
+			<article>
+
+				<h2>Footnotes.js Demo</h2>
+
+				<p>
+					This is a simple demo for a jQuery that tries to adapt footnotes to the web
+					while 'being true' to their ink and paper cousins. There is still some tweaking
+					to be done, but I think they are good enough for a start.
+				</p>
+
+				<h3>The famous Lorem Ipsum, now with footnotes!</h3>
+
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis<sup><a class="fn" href="#fn1">1</a></sup> aute irure dolor
+					in reprehenderit in voluptate velit esse<sup><a class="fn" href="#fn2">2</a></sup>
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>	
+
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis<sup><a class="fn" href="#fn3">a</a></sup> aute irure dolor
+					in reprehenderit in voluptate velit esse<sup><a class="fn" href="#fn4">b</a></sup>
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>	
+				
+
+			<aside class="footnotes">
+					<div id="fn1">This is one of the footnotes. They display under the paragraph just because I feel that's where they should go on the web.</div>
+					<div id="fn2">This is the second footnote. It could go over the first footnote. I know, something to fix.</div>
+					<div id="fn3">This is another of the footnotes</div>
+					<div id="fn4">This is the last footnote</div>
+			</aside>
+<figure>
+<pre>
+<code>
+
+/* This is the jQuery Code */
+$(document).ready(function() {
+	const FOOTNOTE_FRAME = "&lt;div class='footnote_content yyy'&gt;xxx&lt;/div&gt;";
+
+	$(".fn").click(function(event) {
+		event.preventDefault();
+		var footnote_id = $(this).attr('href').replace('#','');
+
+		if ( $('[class *= ' + footnote_id + ']').attr('class') == undefined ) {
+			var x = $(this).text();
+			var footnote_content = x + ': ' + $('[id = ' + footnote_id + ']').html();
+			var final_footnote = FOOTNOTE_FRAME.replace("xxx", footnote_content);
+			final_footnote = final_footnote.replace('yyy', $(this).attr('href'));
+			$(this).parent().parent().after( final_footnote );
+			$(this).parent().parent().addClass('bottom_border');
+		}		
+	});
+
+	$($("body")).on('click', '.footnote_content', function(event) {
+		event.preventDefault();
+		$(this).remove();
+
+	});
+
+});
+
+/* This is the Sass code (almost straight CSS)
+
+
+.footnote_content {
+	background:$header-background; 
+	// #967d69 or rgba(150, 125, 105, 100)
+	display:block;
+	padding: .1em 1em;
+	color: white;
+}
+
+.footnote_content + * {
+	margin-top: .5em;
+}
+
+.footnote_content + .footnote_content {
+	margin-top: 0;
+} 
+//These two add some top margin to anything adjacent but another footnote
+
+.bottom_border {
+	padding-bottom: .5em;
+	border-bottom: solid black thin;
+}
+
+aside.footnotes {
+	display:none;
+}
+</code>
+</pre>
+</figure>
+
+<p>
+	Last update: <date>2016/04/13</date>
+</p>
+
+				
+
+			</article>
+
+
+
+		</main>
+
+
+	</body>
+</html>

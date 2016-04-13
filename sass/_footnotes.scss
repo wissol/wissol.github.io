@@ -1,8 +1,16 @@
 .footnote_content {
 	background:$header-background; 
 	display:block;
-	padding: .1em 1em;
+	padding: .2em 1em;
 	color: white;
+}
+
+.footnote_content + * {
+	margin-top: .5em;
+}
+
+.footnote_content + .footnote_content {
+	margin-top: 0;
 }
 
 .bottom_border {
