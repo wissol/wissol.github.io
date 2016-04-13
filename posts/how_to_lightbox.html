@@ -8,7 +8,12 @@
 		
 		<meta name="description" content="How I coded my simple jQuery lightbox">
 		<meta name="author" content="Miguel de Luis"> 
-		
+
+		<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script><!--jquery-->
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script><!--jquery-->
+		<script src="../js/footnote.js"></script><!-- footnote -->
+		<!-- scripts -->
+
 		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> 
 		<link href='https://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
 		<!-- fonts -->
@@ -59,7 +64,7 @@
 					Just allow me to add a few comments along the way.
 				</p>
 
-				<h2>Enter the lighbox</h2>
+				<h3>Enter the lighbox</h3>
 
 				<h3>The HTML</h3>
 
@@ -218,11 +223,40 @@ return [video_width, video_height];
 					the scroll bar from appearing, as it should be useless in a lightbox.
 				</p>
 
-<h2>Navigating the lightbox</h2>
+				<h3>Navigating the lightbox</h3>
 
+				<p>
+					We have the lightbox displaying; one video or image getting our full focus. Now we want 
+					to check the next image. A click on the arrows will trigger the 
+					<code>display_new_item(next)</code> function, with next equal to true for 
+					the right arrow<sup><a class="fn" href="#fn1">1</a></sup>
+					or false for the left arrow<sup><a class="fn" href="#fn2">2</a>. This function checks if
+					we are displaying an iframe or an image and also if the next item will be an image or video
+					and does some adjustments based on that information.
+  				</p>
+
+  				<p>
+  					In essence, all that it takes, is to gather the information for the next item and replace the
+  					text for the caption, and the all other attributes as necesarry. Nothing too fancy!
+  				</p>
+
+
+		<aside class="footnotes">
+					<div id="fn1">We want the next item</div>
+					<div id="fn2">We want the previous item</div>
+		</aside>
 <figure>
 <code>
 <pre>
+
+$($("body")).on('click', '#rarrow', function() {
+display_new_item(true);
+});
+
+$($("body")).on('click', '#larrow', function() {
+display_new_item(false);
+});
+
 function display_new_item(next){
 var src = $('#lbitem').attr('src');
 var is_video_displayed = $('#lbitem').hasClass('video');
@@ -283,10 +317,14 @@ $('#lbitem').attr('src', new_src);
 </figure>
 
 				<p>
-					To be continued <date>2016/04/12</date>
+					Last update: <date>2016/04/13</date>
 				</p>
 
+				
+
 			</article>
+
+
 
 		</main>
 

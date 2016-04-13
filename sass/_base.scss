@@ -60,6 +60,12 @@ code {
 	padding: 0 0.5em;
 }
 
+sup {
+	font-size: $nav-font-size;
+	vertical-align: super;
+	padding: 0 0.3em;
+}
+
 // images
 
 	figure {
