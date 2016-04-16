@@ -1,0 +1,29 @@
+.margin_note_call {
+	border-bottom: thick dotted white;
+	padding: 0 .3em;
+	cursor: help;
+}
+
+.margin_note_content {
+	font-size: 1em;
+	padding: 1em 0;
+	border-bottom: thin dotted white;
+	width: 100px;
+}
+
+.margin_note_wrapper {
+	display: flex;
+	justify-content: space-between;	
+}
+
+.margin_note_section {
+	display: flex;
+	//justify-content: space-around;
+	flex-direction: column;	
+}
+
+.ahoy {
+	margin-left: 1em;
+	padding-left: 1em;
+	flex-grow: 0;	
+}

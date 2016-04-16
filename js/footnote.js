@@ -10,7 +10,7 @@ $(document).ready(function() {
 			var footnote_content = x + ': ' + $('[id = ' + footnote_id + ']').html();
 			var final_footnote = FOOTNOTE_FRAME.replace("xxx", footnote_content);
 			final_footnote = final_footnote.replace('yyy', $(this).attr('href'));
-			$(this).parent().parent().after( final_footnote );
+			$(this).parent().parent().after( final_footnote )																																	;
 		}		
 	});
 

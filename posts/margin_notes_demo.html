@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lan="EN">
+
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<meta charset="utf-8" /> 
+		
+		<meta name="description" content="Margin notes in jQuery">
+		<meta name="author" content="Miguel de Luis"> 
+
+		<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script><!--jquery-->
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script><!--jquery-->
+		<script src="../js/margin_note.js"></script><!-- margin note -->
+		<!-- scripts -->
+
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> 
+		<link href='https://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+		<!-- fonts -->
+
+		<link rel="stylesheet" type="text/css" href="../css/main.css" media="screen" /> 
+		<!-- CSS, compressed -->
+
+		<title>Margin Notes.js demo | Serenicode, code, fun and the occasional bit of wisdom</title>
+		
+	</head>
+
+	<body>
+		<header>			
+			<div class="wrapper">
+			<div id="blog-header">
+				<h1><a href="../">Serenicode</a></h1>
+				<address>By <a href="mailto:miguel@sabiavida.com" rel="author">Miguel de Luis</a></address>
+			</div>
+
+			<nav>
+				<ul>
+					<li><a href="../posts.html">content</a></li>
+					<li><a href="../mail.html">mail list</a></li>
+					<li><a href="mailto:miguel@sabiavida.com">contact</a></li>
+					<li><a href="https://github.com/wissol">github profile</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		</header>
+
+		<main>
+
+			<article>
+
+				<h2>Margin note.js Demo</h2>
+
+				<p>
+					This is a simple demo for a jQuery that tries to adapt margin notes to the web
+					while 'being true' to their ink and paper cousins. Just as I did for <a href="footnotes_demo.html">footnotes</a>. It adds two wrappers, in this manner:</p>
+				<figure>
+					<p> [ [ margin notes section ] main text section ] </p> 
+				</figure>
+				<p>
+				Both wrappers are flexbox containers, with the margin_notes_section displaying in columns, while the main one displays the margin notes section and the main text section in a row.
+				</p>
+
+				<p>Credit, were credit is due, I took inspiration from <a href="http://francisco.dance/">Francisco Dans</a>, which works slightly different and it's ready for production.</p>
+
+				<h3>The famous Lorem Ipsum, now with <em>margin</em> notes!</h3>
+
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut <span class="margin_note_call" desc="labore humanum est" id="labore">labore</span> et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor
+					in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. <span class="margin_note_call" desc="sint occaecat" id="excepteur">Excepteur</span> sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>	
+
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor <span class="margin_note_call" desc="I'd rather don't use quite long margin notes" id="incididunt">incididunt</span> ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor
+					in reprehenderit in voluptate <span class="margin_note_call" desc="oh margin note" id="velit">velit</span> esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>		
+			
+<figure>
+	<h3>Javascript</h3>
+<pre>
+<code>
+$(document).ready(function() {
+const MARGIN_NOTE_FRAME = 
+"&lt;span class='margin_note_content' id='yyy'&gt;xxx&lt;/span&gt;";
+
+$(".margin_note_call").mouseenter(function(event) {
+event.preventDefault();
+
+// check if there is a flex wrapper
+if ($(this).parent().hasClass('ahoy')) 
+//ahoy class added to parent when we insert the first margin note
+{
+//
+} else {
+$(this).parent().wrap("<div class='margin_note_wrapper'></div>"); 
+//wrap p in div
+$(this).parent().parent().prepend("<div class='margin_note_section'></div>"); 
+//add margin note section to wrapper, before paragraph 
+//append would result in notes placed on the right margin
+}
+
+var margin_note_id = 'mn_' + $(this).attr('id');
+// the margin note id is built
+// prepending mn_ to the call's id
+
+// check if our margin note is _not_ inserted
+if ( $('#' + margin_note_id).length === 0 ) {
+
+// this margin note is not inserted
+// so let's insert it now
+
+var margin_content = $(this).attr('desc');
+// margin note content in desc 
+// attribute of the margin note call
+
+var $margin_note = MARGIN_NOTE_FRAME.replace('xxx',margin_content).replace('yyy',margin_note_id);
+// we get our final margin note element 
+// &lt;span class='margin_note_content' id='mn_someId'&gt;
+// my margin note content
+// &lt;/span&gt;
+
+$(this).parent().addClass('ahoy');
+// we now add the class 'ahoy' to the paragraph
+
+$(this).parent().parent().children(".margin_note_section").append($margin_note);
+// we append the margin note to 
+// the margin note section
+
+} else {
+// if the margin note was in place
+// we remove it
+
+$('#' + margin_note_id).remove();
+
+// let's check whether there are 
+// no margin notes left
+// in the section
+
+if ( $(this).parent().parent().children('.margin_note_section').children().length === 0 ){
+// there are none,
+// so let's remove them
+$(this).parent().parent().children('.margin_note_section').remove();
+$(this).parent().unwrap("<div class='margin_note_wrapper'></div>");
+$(this).parent().removeClass('ahoy');
+// also remove this class
+}
+}
+});	
+
+});
+</code>
+</pre>
+</figure>
+
+<figure>
+	<h3>CSS</h3>
+<pre>
+<code>
+.margin_note_call {
+	border-bottom: thick dotted white;
+	padding: 0 .3em;
+	cursor: help;
+}
+
+.margin_note_content {
+	font-size: 0.8em;
+	padding: 1em 0;
+	border-bottom: thin dotted white;
+	width: 100px; 
+	// suggested value looks OK in most screens
+	// or better, do media queries
+}
+
+.margin_note_wrapper {
+	display: flex;
+	justify-content: space-between;	
+}
+
+.margin_note_section {
+	display: flex;
+	//justify-content: space-around;
+	flex-direction: column;	
+}
+
+.ahoy {
+	margin-left: 1em;
+	padding-left: 1em;	
+}
+</code>
+</pre>
+</figure>
+
+<figure>
+	<h3>HTML</h3>
+<pre>
+<code>
+&lt;script src="http://code.jquery.com/jquery-1.12.0.min.js"&gt;&lt;/script&gt;&lt;!--jquery--&gt;
+&lt;script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"&gt;&lt;/script&gt;&lt;!--jquery--&gt;
+&lt;script src="../js/margin_note.js">&lt;/script&gt;&lt;!-- marginnote --&gt;
+
+&lt;p> &lt;!-- only tested on paragraphs --&gt;
+Lorem ipsum dolor sit amet, 
+
+&lt;span class="margin_note_call" desc="labore humanum est" id="labore"&gt;
+labore
+&lt;/span&gt;
+
+Ut enim ad minim veniam.
+&lt;/p&gt;
+</code>
+</pre>
+</figure>
+
+<p>
+	Last update: <date>2016/04/16</date>
+</p>
+
+				
+
+			</article>
+
+
+
+		</main>
+
+
+	</body>
+</html>
